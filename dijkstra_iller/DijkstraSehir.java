@@ -1,7 +1,5 @@
 import java.util.*;
 
-
-
 public class DijkstraSehir {
     public static void main(String[] args) {
 
