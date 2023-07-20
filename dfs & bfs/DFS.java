@@ -67,6 +67,11 @@ class Graph{
         }
         return result;
     }
+
+    public Map<String, List<String>> getAdj() {
+		return adjVertices;
+	}
+    
     /*
     public void addVertex(String vertex) {
         adjVertices.putIfAbsent(vertex, new ArrayList<>());
