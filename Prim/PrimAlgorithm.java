@@ -27,8 +27,6 @@ class Graph{
         Map<String, Map<String, Integer>> MST = new HashMap<>();
         Map<String, Map<String, Integer>> copyAdjVertices = new HashMap<>();
         copyAdjVertices = adjVertices;
-        Set<String> visited = new HashSet<>();
-
 
         Set<String> keySet=adjVertices.keySet();
         Iterator<String> it=keySet.iterator();
@@ -36,8 +34,9 @@ class Graph{
 
         addVertex(MST, node);
         
-        PrimUtil(MST, copyAdjVertices);
-
+        for(int i = 0 ; i < copyAdjVertices.keySet().size()-1 ; i++){
+            PrimUtil(MST, copyAdjVertices);
+        }
         System.out.println(MST);
     }
 
@@ -48,35 +47,38 @@ class Graph{
         List<String> cEdgeInfo = new ArrayList<>();
 
         for (String string : graph.keySet()) {
-            cEdgeInfo = getCloseEdge(string, cost, copy, cEdgeInfo);
+            cEdgeInfo = getCloseEdge(string, cost, copy, cEdgeInfo, graph);
+            if(cEdgeInfo.isEmpty()){
+                continue;
+            }
             currentNode = cEdgeInfo.get(0);
             edgeNode = cEdgeInfo.get(1);
             cost = Integer.parseInt(cEdgeInfo.get(2));
         }
+
         addEdgeToMST(currentNode, edgeNode, cost, graph);
+        
     }
 
-    private List<String> getCloseEdge(String node ,int cost,Map<String,Map<String,Integer>> graph,List<String> edge){
+    private List<String> getCloseEdge(String node ,int cost,Map<String,Map<String,Integer>> copy,List<String> edge,Map<String,Map<String,Integer>> graph){
         List<String> closeEdge = new ArrayList<>();
         closeEdge = edge;
 
-        for (String string : graph.get(node).keySet()) {
-            if(graph.get(node).get(string)<cost){
+        for (String string : copy.get(node).keySet()) {
+            if(graph.keySet().contains(string)){
+                continue;
+            }
+            if(copy.get(node).get(string)<cost){
                 closeEdge.clear();
                 closeEdge.add(node);
                 closeEdge.add(string);
-                closeEdge.add(graph.get(node).get(string).toString());
-                cost = graph.get(node).get(string);
+                closeEdge.add(copy.get(node).get(string).toString());
+                cost = copy.get(node).get(string);
             }
         }
         return closeEdge;
     }
     
-
-
-
-
-
     public Map<String, Map<String,Integer>> getAdj() {
 		return adjVertices;
 	}
@@ -104,11 +106,6 @@ class Graph{
     
     private void addVertex(Map<String,Map<String,Integer>> graph,String vertex) {
         graph.putIfAbsent(vertex, new HashMap<String,Integer>());
-    }
-
-    private void removeEdge(String src, String dest,Map<String,Map<String,Integer>> graph) {
-        graph.get(src).remove(dest);
-        graph.get(dest).remove(src);
     }
 
 }
