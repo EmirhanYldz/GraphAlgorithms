@@ -15,7 +15,7 @@ public class PrimAlgorithm{
         graph.addEdge("E","F",3);
         graph.addEdge("F","G",2);
 
-
+        graph.Prim();
     }
 }
 
@@ -35,33 +35,41 @@ class Graph{
         String node = it.next();
 
         addVertex(MST, node);
-        for(int i =0;i<adjVertices.keySet().size();i++){
-            
-        }
+        
+        PrimUtil(MST, copyAdjVertices);
 
+        System.out.println(MST);
     }
 
     private void PrimUtil(Map<String,Map<String,Integer>> graph,Map<String,Map<String,Integer>> copy){
         int cost = Integer.MAX_VALUE;
         String currentNode = null;
         String edgeNode = null;
+        List<String> cEdgeInfo = new ArrayList<>();
+
         for (String string : graph.keySet()) {
-            currentNode = string;
-            edgeNode = getCloseVertex(string,edgeNode,cost,copy);
+            cEdgeInfo = getCloseEdge(string, cost, copy, cEdgeInfo);
+            currentNode = cEdgeInfo.get(0);
+            edgeNode = cEdgeInfo.get(1);
+            cost = Integer.parseInt(cEdgeInfo.get(2));
         }
-        addEdge(edgeNode, edgeNode, cost);
+        addEdgeToMST(currentNode, edgeNode, cost, graph);
     }
 
+    private List<String> getCloseEdge(String node ,int cost,Map<String,Map<String,Integer>> graph,List<String> edge){
+        List<String> closeEdge = new ArrayList<>();
+        closeEdge = edge;
 
-
-    private String getCloseVertex(String node ,String edgeNode,int cost,Map<String,Map<String,Integer>> graph){
         for (String string : graph.get(node).keySet()) {
             if(graph.get(node).get(string)<cost){
-                edgeNode = string;
+                closeEdge.clear();
+                closeEdge.add(node);
+                closeEdge.add(string);
+                closeEdge.add(graph.get(node).get(string).toString());
                 cost = graph.get(node).get(string);
             }
         }
-        return edgeNode;
+        return closeEdge;
     }
     
 
@@ -87,7 +95,7 @@ class Graph{
         if(!graph.containsKey(src)){
             addVertex(graph,src);
         }
-        if(!adjVertices.containsKey(dest)){
+        if(!graph.containsKey(dest)){
             addVertex(graph,dest);
         }
         graph.get(src).put(dest,weight);
