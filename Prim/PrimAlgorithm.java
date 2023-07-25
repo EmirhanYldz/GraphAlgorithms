@@ -25,28 +25,36 @@ class Graph{
 
     public void Prim(){
         Map<String, Map<String, Integer>> MST = new HashMap<>();
+        Map<String, Map<String, Integer>> copyAdjVertices = new HashMap<>();
+        copyAdjVertices = adjVertices;
         Set<String> visited = new HashSet<>();
 
 
         Set<String> keySet=adjVertices.keySet();
         Iterator<String> it=keySet.iterator();
-        String start = it.next();
+        String node = it.next();
 
-        addVertex(MST, start);
+        addVertex(MST, node);
         for(int i =0;i<adjVertices.keySet().size();i++){
             
         }
 
     }
 
-    private void PrimUtil(String node,Map<String,Map<String,Integer>> graph){
-        for (String string : graph.get(node).keySet()) {
-            
-        }
-    }
-    private String getCloseVertex(String node ,Map<String,Map<String,Integer>> graph){
-        String edgeNode = null;
+    private void PrimUtil(Map<String,Map<String,Integer>> graph,Map<String,Map<String,Integer>> copy){
         int cost = Integer.MAX_VALUE;
+        String currentNode = null;
+        String edgeNode = null;
+        for (String string : graph.keySet()) {
+            currentNode = string;
+            edgeNode = getCloseVertex(string,edgeNode,cost,copy);
+        }
+        addEdge(edgeNode, edgeNode, cost);
+    }
+
+
+
+    private String getCloseVertex(String node ,String edgeNode,int cost,Map<String,Map<String,Integer>> graph){
         for (String string : graph.get(node).keySet()) {
             if(graph.get(node).get(string)<cost){
                 edgeNode = string;
@@ -56,6 +64,11 @@ class Graph{
         return edgeNode;
     }
     
+
+
+
+
+
     public Map<String, Map<String,Integer>> getAdj() {
 		return adjVertices;
 	}
