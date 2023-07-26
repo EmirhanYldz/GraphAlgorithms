@@ -6,6 +6,7 @@ public class BoruvkaSollinAlgorithm{
     }
 }
 
+
 class Graph{
 	private Map<String, Map<String, Integer>> adjVertices = new HashMap<>();
 
