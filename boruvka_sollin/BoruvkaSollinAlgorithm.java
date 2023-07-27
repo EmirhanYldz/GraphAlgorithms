@@ -10,6 +10,16 @@ public class BoruvkaSollinAlgorithm{
 class Graph{
 	private Map<String, Map<String, Integer>> adjVertices = new HashMap<>();
 
+    public void Boruvka(){
+        Map<String, Map<String, Integer>> MST = new HashMap<>();
+        Map<String, Map<String, Integer>> copyAdjVertices = new HashMap<>();
+        copyAdjVertices = adjVertices;
+
+        for (String iterable_element : iterable) {
+            
+        }
+    }
+
     public Map<String, Map<String,Integer>> getAdj() {
 		return adjVertices;
 	}
