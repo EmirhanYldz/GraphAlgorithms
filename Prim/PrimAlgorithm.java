@@ -25,8 +25,6 @@ class Graph{
 
     public void Prim(){
         Map<String, Map<String, Integer>> MST = new HashMap<>();
-        Map<String, Map<String, Integer>> copyAdjVertices = new HashMap<>();
-        copyAdjVertices = adjVertices;
 
         Set<String> keySet=adjVertices.keySet();
         Iterator<String> it=keySet.iterator();
@@ -34,12 +32,10 @@ class Graph{
 
         addVertex(MST, node);
         
-        for(int i = 0 ; i < copyAdjVertices.keySet().size()-1 ; i++){
-            PrimUtil(MST, copyAdjVertices);
+        for(int i = 0 ; i < adjVertices.keySet().size()-1 ; i++){
+            PrimUtil(MST, adjVertices);
         }
         System.out.println(MST);
-        System.out.println(adjVertices);
-        System.out.println(copyAdjVertices);
     }
 
     private void PrimUtil(Map<String,Map<String,Integer>> graph,Map<String,Map<String,Integer>> copy){
