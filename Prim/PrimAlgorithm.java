@@ -38,6 +38,8 @@ class Graph{
             PrimUtil(MST, copyAdjVertices);
         }
         System.out.println(MST);
+        System.out.println(adjVertices);
+        System.out.println(copyAdjVertices);
     }
 
     private void PrimUtil(Map<String,Map<String,Integer>> graph,Map<String,Map<String,Integer>> copy){
@@ -93,6 +95,7 @@ class Graph{
         adjVertices.get(src).put(dest,weight);
         adjVertices.get(dest).put(src,weight);
     }
+    
     public void addEdgeToMST(String src, String dest,int weight,Map<String, Map<String, Integer>> graph) {
         if(!graph.containsKey(src)){
             addVertex(graph,src);
