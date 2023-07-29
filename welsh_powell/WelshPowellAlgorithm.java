@@ -21,26 +21,44 @@ public class WelshPowellAlgorithm {
 
 class Graph{
 	private Map<String, List<String>> adjVertices= new HashMap<>();
-
+    
     public void WelshPowell(){
-        Map<String,String> vertexColor = new HashMap<>();
+        
+        Map<String, String> vertexColor = new HashMap<>();
         Map<String, Integer> vertexList = new HashMap<>();
+        String[] colors = {"RED","BLUE","GREEN","YELLOW","PURPLE","ORANGE"};
+
+
         for (String string : adjVertices.keySet()) {
             vertexList.put(string,adjVertices.get(string).size());
             vertexColor.put(string,null);
         }
+
         List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(vertexList.entrySet());
         sortedList.sort(Map.Entry.comparingByValue());
         Collections.reverse(sortedList);
+
         int i=0;
-        for (Map.Entry<String,Integer> entry : sortedList) {
-            String node = entry.getKey();
-            if(!vertexColor.get(node).equals(Integer.toString(i)) && !adjVertices.get(node).contains(Integer.toString(i))){
-                vertexColor.put(node,Integer.toString(i));
-                sortedList.remove(entry);
+        while(vertexColor.containsValue(null)){
+            for (Map.Entry<String,Integer> entry : sortedList) {
+                String node = entry.getKey();
+                if(vertexColor.get(node)==null && nodeCheck(adjVertices.get(node),vertexColor,colors[i])){
+                    vertexColor.put(node,colors[i]);
+                }
             }
+            i++;
+        }  
+        System.out.println(vertexColor);
+    }
+
+    private boolean nodeCheck(List<String> adjNodes, Map<String, String> vertexColor, String control) {
+        for (String string : adjNodes) {
+            String color = vertexColor.get(string);
+            if (color != null && color.equals(control)) {
+                return false;
+            }  
         }
-        
+        return true;
     }
 
     public void addEdge(String src, String dest) {
@@ -67,5 +85,4 @@ class Graph{
 		return adjVertices;
 	}
 
-    
 }
