@@ -87,13 +87,8 @@ class Graph{
     }
 
     private void sortEdges(){
-        Comparator<Edge> weightComparator = new Comparator<Edge>() {
-            @Override
-            public int compare(Edge edge1, Edge edge2) {
-                return Integer.compare(edge1.weight, edge2.weight);
-            }
-        };
-        Collections.sort(edges, weightComparator);;
+        Comparator<Edge> comparator = (p1, p2) -> Integer.compare(p1.weight, p2.weight);
+        Collections.sort(edges, comparator);
     }
 
     Boolean isCyclic(Map<String,Map<String,Integer>> graph)

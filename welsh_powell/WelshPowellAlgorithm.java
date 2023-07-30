@@ -72,11 +72,6 @@ class Graph{
         adjVertices.get(dest).add(src);
     }
 
-    private void removeEdge(String u, String v) {
-        adjVertices.get(u).remove(v);
-        adjVertices.get(v).remove(u);
-    }
-
     public void addVertex(String vertex) {
         adjVertices.putIfAbsent(vertex, new ArrayList<>());
     }
