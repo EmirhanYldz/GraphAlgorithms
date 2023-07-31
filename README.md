@@ -18,3 +18,9 @@
 [Kruskal Minimum Spanning](https://github.com/EmirhanYldz/GraphAlgorithms/blob/main/Kruskal/KruskalAlgorithm.java)
 
 [Prim Minimum Spanning](https://github.com/EmirhanYldz/GraphAlgorithms/blob/main/Prim/PrimAlgorithm.java)
+
+[Boruvka Sollig Spanning](https://github.com/EmirhanYldz/GraphAlgorithms/blob/main/boruvka_sollin/BoruvkaSollinAlgorithm.java)
+
+[Reverse Delete Spanning](https://github.com/EmirhanYldz/GraphAlgorithms/blob/main/reverse_delete/ReverseDeleteAlgorithm.java)
+
+[Welsh Powell Algorithm](https://github.com/EmirhanYldz/GraphAlgorithms/blob/main/reverse_delete/ReverseDeleteAlgorithm.java)
